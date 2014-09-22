@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/quiz/accessrule/quizoptions/db" VERSION="20111003" COMMENT="XMLDB file for Moodle mod/quiz/accessrule/quizoptions"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="options_smowl_quiz" COMMENT="Stores the additional setting required by this accessrule">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="quizid"/>
+        <FIELD NAME="quizid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" COMMENT="Foreign key to quiz.id." PREVIOUS="id" NEXT="smowlquizrequired"/>
+        <FIELD NAME="smowlquizrequired" TYPE="int" LENGTH="2" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" COMMENT="Boolean, if true, smowl is required." PREVIOUS="quizid" NEXT="smowlquizmedia"/>
+		<FIELD NAME="smowlquizmedia" TYPE="int" LENGTH="2" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" COMMENT="Media fotos/min" PREVIOUS="smowlquizrequired" NEXT="smowlquizvarianza"/>
+		<FIELD NAME="smowlquizvarianza" TYPE="int" LENGTH="3" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" COMMENT="Varianza intervalo captura" PREVIOUS="smowlquizmedia" NEXT="block_instance_id"/>
+		<FIELD NAME="block_instance_id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="ID de la instancia del bloque" PREVIOUS="smowlquizvarianza"/>
+	  </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="quizid"/>
+        <KEY NAME="quizid" TYPE="foreign-unique" FIELDS="quizid" REFTABLE="quiz" REFFIELDS="id" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>
